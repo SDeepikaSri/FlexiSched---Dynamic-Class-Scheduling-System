@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Teacher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/background.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            color: #444;
+        }
+        input, button {
+            margin: 8px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            background-color: #5A67D8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #response {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🧑‍🏫 Register a Teacher</h2>
+        <form id="registerForm">
+            <label>Teacher ID:</label><br>
+            <input type="text" id="teacher_id" required><br><br>
+
+            <label>Name:</label><br>
+            <input type="text" id="name" required><br><br>
+
+            <label>Subject:</label><br>
+            <input type="text" id="subject" required><br><br>
+
+            <label>Time Required (in units):</label><br>
+            <input type="number" id="time_required" required><br><br>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p id="response"></p>
+
+        <a href="/"><button>🔙 Back to Schedule</button></a>
+    </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const data = {
+                teacher_id: document.getElementById("teacher_id").value,
+                name: document.getElementById("name").value,
+                subject: document.getElementById("subject").value,
+                time_required: parseInt(document.getElementById("time_required").value)
+            };
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("response").innerText = data.message;
+                document.getElementById("registerForm").reset();
+            })
+            .catch(err => {
+                document.getElementById("response").innerText = "Error: " + err;
+            });
+        });
+    </script>
+</body>
+</html>
