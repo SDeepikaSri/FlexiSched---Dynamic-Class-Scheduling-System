@@ -1,6 +1,6 @@
 # daa_project
 
-###esp8266 code
+##esp8266 code
 
 ```
 #include <ESP8266WiFi.h>
@@ -124,6 +124,6 @@ void sendToFlask(String uidStr) {
     http.end();
   } else {
     Serial.println("WiFi not connected");
-```
   }
 }
+```
