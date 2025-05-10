@@ -1,6 +1,6 @@
-# daa_project
+# FlexiSched
 
-##esp8266 code
+## esp8266 code
 
 ```
 #include <ESP8266WiFi.h>
