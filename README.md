@@ -1,6 +1,8 @@
 # daa_project
 
 ###esp8266 code
+
+```
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <SPI.h>
@@ -102,32 +104,26 @@ void sendToFlask(String uidStr) {
   if (WiFi.status() == WL_CONNECTED) {
     WiFiClient client;
     HTTPClient http;
-
     http.setTimeout(5000);  // Set timeout to 5 seconds
     http.begin(client, server);
     http.addHeader("Content-Type", "application/json");
-
     String payload = "{\"uid\":\"" + uidStr + "\"}";
-
     int httpResponseCode = http.POST(payload);
-
     // Retry once if it fails
     if (httpResponseCode <= 0) {
       Serial.println("POST failed, retrying in 2s...");
       delay(2000);
       httpResponseCode = http.POST(payload);
     }
-
     Serial.print("POST response: ");
     Serial.println(httpResponseCode);
-
     if (httpResponseCode > 0) {
       String response = http.getString();
       Serial.println("Server response: " + response);
     }
-
     http.end();
   } else {
     Serial.println("WiFi not connected");
+```
   }
 }
