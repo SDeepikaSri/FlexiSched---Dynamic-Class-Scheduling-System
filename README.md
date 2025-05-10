@@ -13,8 +13,8 @@
 #define GREEN_LED D1
 #define RED_LED D2
 
-const char* ssid = "CMF";
-const char* password = "deepika2005";
+const char* ssid = ["SSID"];
+const char* password = ["Passwaord"];
 
 // Flask server IP and endpoint (using port 80)
 const char* server = "http://192.168.39.120/rfid";
